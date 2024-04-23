@@ -2,138 +2,78 @@
 
 <template>
   <div class="homePageIndexMain">
-    <div class="homePageIndexHead">
-      <img class="rounded-image" src="@/image/background1.jpg">
+    <div class="homePageIndexHeader">
+
     </div>
     <div class="homePageIndexBody">
-      <div class="left-section">
-        <div class="homePageIndexUserInfo">
-          <div class="homePageIndexUserInfoHeadImage">
-            <img class="homePageIndexUserInfoHeadImage" src="@/image/head.png">
-          </div>
-          <div class="homePageIndexUserInfoBody">
-            <div class="homePageIndexUserInfoBodyName">
-              <h1>用户名</h1>
-            </div>
-            <div class="homePageIndexUserInfoBodyIntroduction">
-              <div>
-                <div>文章</div>
-                <div>100</div>
-              </div>
-              <div>
-                <div>点赞</div>
-                <div>100</div>
-              </div>
-              <div>
-                <div>收藏</div>
-                <div>100</div>
-              </div>
-              <div>
-                <div>粉丝</div>
-                <div>100</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="right-section">
-        <!-- 右侧内容 -->
-      </div>
+      <text_out :text="logo.text" :props_textBottom="logo.text_bottom" style="color: black; font-size: 90px; font-weight: normal; font-family: 'PingFang SC', sans-serif;"></text_out>
+    </div>
+
+
+    <div class="homePageIndexFooter">
+
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
+<script>
+import text_out from '@/views/homePage/tool/text-out-view.vue'
 
+
+export default {
+  components:{
+    text_out,
+  },
+  data(){
+    return{
+      logo:{
+        text: "XingHe",
+        text_bottom: -100
+      }
+    }
+  }
+}
 </script>
 
 <style scoped>
-.homePageIndexHead{
+.homePageIndexMain{
+  background-image: url("@/image/background.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 99vw;
+  height: 99.5vh;
+  margin-top: -70px;
+}
+.drill-up-text {
   position: relative;
-  z-index: -1;
+  animation: drillUp 2s ease-out forwards; /* 应用动画，持续时间为2秒，缓出效果，动画结束后保持最终状态 */
+  opacity: 1; /* 初始状态透明 */
+  transform: translateY(100%); /* 初始位置在视口下方 */
+}
+
+@keyframes drillUp {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.homePageIndexHeader{
+
 }
 .homePageIndexBody{
-  margin-top: 30px;
-}
-.rounded-image {
-  width: 98vw;
-  margin-top: -50px;
-  border-radius: 10px;
-  background-color: yellow;
-}
-
-.left-section {
-  float: left;
-  width: 35%;
-}
-
-.right-section {
-  float: right;
-  width: 64%;
-  height: 1000px;
-}
-
-.left-section,
-.right-section {
-  display: flex;
-  justify-content: center; /* 水平居中 */
-  overflow: hidden; /* 避免内容溢出 */
-  border: #181818 solid 1px;
-}
-.homePageIndexUserInfo {
-  display: flex;
+  padding-top: 200px;
+  height: 300px;
   justify-content: center;
-  flex-direction: column;
   align-items: center;
-  width: 350px; /* 宽度 */
-  height: 400px; /* 高度 */
-  background: linear-gradient(to right, #ff9966, #ff5e62); /* 渐变背景颜色 */
-  border-radius: 5%; /* 圆形 */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* 添加阴影 */
-  transition: box-shadow 0.3s ease; /* 添加过渡动画 */
 }
-.homePageIndexUserInfo:hover {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8); /* 鼠标悬停时的阴影效果 */
+.homePageIndexFooter{
+
 }
 
-.homePageIndexUserInfoHeadImage {
-  width: 100px; /* 宽度 */
-  height: 100px; /* 高度 */
-  background: white;
-  border-radius: 50%; /* 圆形 */
-}
-.homePageIndexUserInfoHeadImage img {
-  transition: transform 0.5s ease;
-}
-.homePageIndexUserInfoHeadImage:hover img {
-  transform: rotate(360deg);
-  transition: transform 0.5s ease; /* 添加过渡动画 */
-}
-
-.homePageIndexUserInfoBody {
-  text-align: center;
-  float: none;
-}
-@media (max-width: 850px) {
-  .left-section,
-  .right-section {
-    display: flex;
-    justify-content: center; /* 水平居中 */
-    overflow: hidden; /* 避免内容溢出 */
-    border: #181818 solid 1px;
-    width: 98%;
-    float: none;
-  }
-
-  .homePageIndexUserInfo {
-    width: 100%; /* 宽度占满 */
-  }
-}
-.homePageIndexUserInfoBodyIntroduction{
-  display: flex;
-  justify-content: space-around;
-  gap: 50px;
-}
 
 
 </style>
