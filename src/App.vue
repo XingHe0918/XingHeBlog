@@ -42,10 +42,14 @@
 <script>
 import overlayTransition from "@/views/tool/overlay/overlay-transition.vue";
 import overlayOut from "@/views/tool/overlay/overlay-out.vue";
+import SlideUpOverlay from "@/views/tool/overlay/overlay-out.vue";
+
+
+
 export default {
   components:{
     overlayTransition,
-    overlayOut,
+    SlideUpOverlay,
   },
 
   data() {
@@ -64,37 +68,13 @@ export default {
     }
   },
 
-  // beforeRouteEnter(to, from, next) {
-  //   console.log('beforeRouteEnter called'); // 添加日志输出以确认是否调用
-  //   next(vm => {
-  //     vm.isOverlayVisible = true;
-  //     vm.$nextTick(() => {
-  //       setTimeout(() => {
-  //         vm.isOverlayVisible = false;
-  //       }, 500); // 假设动画持续时间为 500ms
-  //     });
-  //   });
-  // },
-
-  // beforeUnmount() {
-  //   // 在组件销毁前执行操作
-  //   console.log('Component will be destroyed');
-  // },
-  //
-  // beforeRouteLeave(to, from, next) {
-  //   console.log('beforeRouteLeave called'); // 添加日志输出以确认是否调用
-  //   this.isOverlayOutVisible = true;
-  //   this.$nextTick(() => {
-  //     setTimeout(() => {
-  //       this.isOverlayVisible = false;
-  //       next(); // 调用 next() 以继续路由导航
-  //     }, 500); // 假设动画持续时间为 500ms
-  //   });
-  // },
   methods:{
     changeMenuView(){
       this.menuView = !this.menuView
     },
+    toggleOverlay() {
+      this.$refs.overlay.toggleOverlay();
+    }
   }
 }
 </script>

@@ -23,7 +23,7 @@ export default {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 1); /* 黑色半透明背景 */
-  z-index: 9999; /* 确保覆盖在页面内容之上 */
+  z-index: 19999; /* 确保覆盖在页面内容之上 */
   transition: top 1s ease-in-out; /* 添加过渡效果 */
 }
 

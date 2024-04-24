@@ -1,6 +1,26 @@
 <template>
-  <div class="overlay"></div>
+  <transition name="slide-up-overlay">
+    <div v-if="this.$props.visible" class="overlay"></div>
+  </transition>
 </template>
+
+<script>
+export default {
+  props:{
+    visible:Boolean
+  },
+  // data() {
+  //   return {
+  //     visible: false
+  //   };
+  // },
+  // methods: {
+  //   toggleOverlay() {
+  //     this.visible = !this.visible;
+  //   }
+  // }
+};
+</script>
 
 <style scoped>
 .overlay {
@@ -9,18 +29,21 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8); /* 黑色半透明背景 */
-  z-index: 9999; /* 确保覆盖在页面内容之上 */
-  transition: top 0.5s ease-in-out; /* 定义动画效果 */
+  background-color: rgba(0, 0, 0, 1);
+  z-index: 19999;
+  transition: top 1s ease;
 }
 
-/* 进入动画的起始状态 */
-.overlay-slide-enter-active {
-  top: 0; /* 进入动画结束位置 */
+.slide-up-overlay-enter-active {
+  top: 100%;
 }
 
-/* 离开动画的起始状态 */
-.overlay-slide-leave-active {
-  top: -100%; /* 离开动画结束位置 */
+.slide-up-overlay-leave-active {
+  top: 0;
+}
+
+.slide-up-overlay-enter,
+.slide-up-overlay-leave-to {
+  transform: translateY(0%);
 }
 </style>
