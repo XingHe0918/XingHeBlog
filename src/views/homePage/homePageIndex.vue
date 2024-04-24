@@ -3,15 +3,10 @@
 <template>
   <div class="homePageIndexMain">
     <div class="homePageIndexHeader">
-
     </div>
     <div class="homePageIndexBody">
-      <text_out :text="logo.text" :props_textBottom="logo.text_bottom" style="color: black; font-size: 90px; font-weight: normal; font-family: 'PingFang SC', sans-serif;"></text_out>
-    </div>
-
-
-    <div class="homePageIndexFooter">
-
+      <text_out class="homePageIndexBody_LOGO" :text="logo.text" :props_textBottom="logo.text_bottom" ></text_out>
+      <text_out style="margin-top: -100px" :text="BlogCreate.text" :props_textBottom="BlogCreate.text_bottom"></text_out>
     </div>
   </div>
 </template>
@@ -28,7 +23,11 @@ export default {
     return{
       logo:{
         text: "XingHe",
-        text_bottom: -100
+        text_bottom: -120
+      },
+      BlogCreate:{
+        text:"Blog created in 2024",
+        text_bottom: -50
       }
     }
   }
@@ -38,17 +37,34 @@ export default {
 <style scoped>
 .homePageIndexMain{
   background-image: url("@/image/background.jpg");
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  width: 99vw;
-  height: 99.5vh;
-  margin-top: -70px;
+  margin-top: -60px;
+  transition: width 0.8s ease-out, left 0.8s ease-out;
 }
-.drill-up-text {
-  position: relative;
-  animation: drillUp 2s ease-out forwards; /* 应用动画，持续时间为2秒，缓出效果，动画结束后保持最终状态 */
-  opacity: 1; /* 初始状态透明 */
-  transform: translateY(100%); /* 初始位置在视口下方 */
+.homePageIndexBody{
+  padding-top: 200px;
+  height: 300px;
+  justify-content: center;
+  align-items: center;
+}
+.homePageIndexBody_LOGO{
+  color: black;
+  font-size: 90px;
+  font-weight: normal;
+  font-family: 'PingFang SC', sans-serif;
+  transition:font-size 1s ease-out;
+}
+
+@media (max-width: 850px) {
+  .homePageIndexBody_LOGO{
+    color: black;
+    font-size: 50px;
+    font-weight: normal;
+    font-family: 'PingFang SC', sans-serif;
+    transition:font-size 1s ease-out;
+  }
 }
 
 @keyframes drillUp {
@@ -64,12 +80,7 @@ export default {
 .homePageIndexHeader{
 
 }
-.homePageIndexBody{
-  padding-top: 200px;
-  height: 300px;
-  justify-content: center;
-  align-items: center;
-}
+
 .homePageIndexFooter{
 
 }
