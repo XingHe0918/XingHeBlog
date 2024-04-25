@@ -1,26 +1,16 @@
 <template>
   <transition name="slide-up-overlay">
-    <div v-if="this.$props.visible" class="overlay"></div>
+    <div v-if="visible" class="overlay"></div>
   </transition>
 </template>
 
-<script>
-export default {
-  props:{
-    visible:Boolean
-  },
-  // data() {
-  //   return {
-  //     visible: false
-  //   };
-  // },
-  // methods: {
-  //   toggleOverlay() {
-  //     this.visible = !this.visible;
-  //   }
-  // }
-};
+<script setup lang="ts">
+defineProps<{
+  visible: boolean;
+}>();
+
 </script>
+
 
 <style scoped>
 .overlay {
@@ -46,4 +36,28 @@ export default {
 .slide-up-overlay-leave-to {
   transform: translateY(0%);
 }
+
+/*.overlay {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 1);
+  z-index: 19999;
+  transition: bottom 1s ease;
+}
+
+.slide-up-overlay-enter-active {
+  bottom: 100%;
+}
+
+.slide-up-overlay-leave-active {
+  bottom: 0;
+}
+
+.slide-up-overlay-enter,
+.slide-up-overlay-leave-to {
+  transform: translateY(0);
+}*/
 </style>

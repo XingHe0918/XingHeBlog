@@ -5,30 +5,21 @@
   </div>
 </template>
 
-<script>
-import {reactive} from "vue";
+<script setup lang="ts">
+import { ref, onMounted,} from "vue";
+const textBody = defineProps<{
+  text: string,
+  props_textBottom: number,
+}>()
+const textBottom = ref<number>(textBody.props_textBottom);
 
-export default {
-  props:{
-    text: String,
-    props_textBottom: Number
-  },
-  data() {
-    return {
-      textBottom: this.$props.props_textBottom, // 文本的初始位置
-    };
-  },
-  mounted() {
-    // 使用Vue的$nextTick确保DOM已经更新
-    this.$nextTick(() => {
-      // 设置定时器使文本开始移动
-      setTimeout(() => {
-        this.textBottom = 0; // 将文本移动到横线上方
-      }, 500); // 延迟1秒后开始动画
-    });
-  },
-};
+onMounted(() => {
+  setTimeout(() => {
+    textBottom.value = 0;
+  }, 500);
+});
 </script>
+
 
 <style scoped>
 .container {

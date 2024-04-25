@@ -8,16 +8,16 @@
             <span></span>
             <span></span>
           </div>
-          <img class="homePageIndexMenuImage" style="float: left;" src="@/image/动态.gif">
+          <img class="homePageIndexMenuImage" alt="" style="float: left;" src="@/image/动态.gif">
           <div style="float: left;margin-top: 5px;margin-left: 10px">
-            <el-text class="main_text" style="position: relative; z-index: 10000;color: black; font-size: 24px; font-weight: bold; font-family: 'PingFang SC', sans-serif;">XingHe</el-text>
+            <el-text class="main_text" style="position: relative; z-index: 10000;color: black; font-size: 24px; font-weight: normal; font-family: 'PingFang SC', sans-serif;">XingHe</el-text>
           </div>
 
           <div class="navbar-drawer" :class="{ 'open': menuView }">
             <div style="width: 100%;">
               <el-menu>
                 <el-menu-item index="/">
-                  <el-text class="App-navigation-router-link" style="color: black; font-size: 24px; font-family: 'PingFang SC', sans-serif;">首页</el-text>
+                  <el-text class="App-navigation-router-link" style="font-size: 24px;">首页</el-text>
                 </el-menu-item>
               </el-menu>
             </div>
@@ -26,11 +26,12 @@
       </div>
       <div class="App-navigation">
         <overlayTransition :visible="isOverlayVisible"/>
-        <transition name="overlay-slide">
-          <overlayOut v-if="isOverlayOutVisible"></overlayOut>
-        </transition>
-        <router-link to="/" class="App-navigation-router-link" style="color: black; font-size: 24px; font-family: 'PingFang SC', sans-serif;">首页</router-link>
-        <router-link to="/about">abot</router-link>
+        <router-link to="/" class="App-navigation-router-link" >首页</router-link>
+        <router-link to="/articleClassification" class="App-navigation-router-link">文章</router-link>
+        <router-link to="/projectClassification" class="App-navigation-router-link">我的</router-link>
+        <router-link to="/about" class="App-navigation-router-link">关于</router-link>
+        <router-link to="/message" class="App-navigation-router-link">留言</router-link>
+        <router-link to="/friendLink" class="App-navigation-router-link">友链</router-link>
       </div>
     </div>
       <RouterView class="APPBody"/>
@@ -39,44 +40,25 @@
 
 </template>
 
-<script>
+<script setup lang="ts">
+import { ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
 import overlayTransition from "@/views/tool/overlay/overlay-transition.vue";
-import overlayOut from "@/views/tool/overlay/overlay-out.vue";
-import SlideUpOverlay from "@/views/tool/overlay/overlay-out.vue";
+const menuView = ref<boolean>(false);
+const isOverlayVisible = ref<boolean>(false);
 
+const route = useRoute();
 
+watch(route, () => {
+  isOverlayVisible.value = true;
+  setTimeout(() => {
+    isOverlayVisible.value = false;
+  }, 0);
+});
 
-export default {
-  components:{
-    overlayTransition,
-    SlideUpOverlay,
-  },
-
-  data() {
-    return {
-      menuView: false,
-      isOverlayVisible: false,
-      isOverlayOutVisible: false,
-    }
-  },
-  watch: {
-    '$route'(to, from) {
-      this.isOverlayVisible = true;
-      this.$nextTick(() => {
-        this.isOverlayVisible = false;
-      });
-    }
-  },
-
-  methods:{
-    changeMenuView(){
-      this.menuView = !this.menuView
-    },
-    toggleOverlay() {
-      this.$refs.overlay.toggleOverlay();
-    }
-  }
-}
+const changeMenuView = () => {
+  menuView.value = !menuView.value;
+};
 </script>
 
 <style>
@@ -122,9 +104,11 @@ html {
 
 
 .App-navigation-router-link {
+  font-size: 16px;
+  font-family: 'PingFang SC', sans-serif;
   margin-right: 40px;
   text-decoration: none;
-  color: white;
+  color: black;
   position: relative; /* 相对定位，以便下划线定位 */
 }
 
@@ -134,7 +118,7 @@ html {
   left: 0;
   bottom: -2px;
   width: 100%;
-  height: 2.5px;
+  height: 2px;
   background-color: black;
   opacity: 0; /* 初始状态为透明 */
   transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* 过渡效果用于透明度和变形 */
@@ -175,8 +159,6 @@ html {
   z-index: 10000;
 }
 
-.homePageIndexMenu{
-}
 .homePageIndexMenuImage {
   z-index: 10000;
   position: relative;
@@ -198,12 +180,7 @@ html {
   display: none;
 }
 
-.homePageIndexMenuImage--small {
-  margin-left: 60px;
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-}
+
 @media (max-width: 850px)  {
   .App-navigation {
     display: none;
@@ -273,9 +250,9 @@ html {
     padding-top: 100px;
     display: flex;
     position: fixed;
-    top: 0px;
+    top: 0;
     left: -100%;
-    width: 0%;
+    width: 0;
     height: 100%;
     background-color: #fff;
     transition: left 0.8s ease, width 0.8s ease;

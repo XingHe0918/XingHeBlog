@@ -15,6 +15,12 @@
     "module": "esnext",
     "target": "esnext",
     "jsx": "preserve",
+    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
     // 其他选项...
   },
   "include": [

@@ -30,7 +30,6 @@ export default {
 <style scoped>
 .container {
   position: relative;
-  z-index: 11111;
   height: 200px; /* 根据需要调整容器高度 */
   overflow: hidden; /* 隐藏超出容器的内容 */
 }

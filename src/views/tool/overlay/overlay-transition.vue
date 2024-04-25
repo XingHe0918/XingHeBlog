@@ -4,16 +4,12 @@
   </transition>
 </template>
 
-<script>
-export default {
-  props: {
-    visible: {
-      type: Boolean,
-      default: false
-    }
-  }
-};
+<script setup lang="ts">
+defineProps<{
+  visible: boolean;
+}>();
 </script>
+
 
 <style scoped>
 .overlay {

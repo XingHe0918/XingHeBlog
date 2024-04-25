@@ -6,46 +6,35 @@
     </div>
     <div class="homePageIndexBody">
       <text_out class="homePageIndexBody_LOGO" :text="logo.text" :props_textBottom="logo.text_bottom" ></text_out>
-      <text_out style="margin-top: -100px" :text="BlogCreate.text" :props_textBottom="BlogCreate.text_bottom"></text_out>
+      <text_out style="margin-top: -100px;" :text="BlogCreate.text" :props_textBottom="BlogCreate.text_bottom"></text_out>
     </div>
     <slide-up-overlay :visible="overlay_out_view"></slide-up-overlay>
-
-
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import text_out from '@/views/homePage/tool/text-out-view.vue'
 import SlideUpOverlay from "@/views/tool/overlay/overlay-out.vue";
+import {ref} from "vue";
+import {onBeforeRouteLeave} from "vue-router";
 
-export default {
-  components:{
-    SlideUpOverlay,
-    text_out,
-  },
-  data(){
-    return{
-      overlay_out_view: false,
-      logo:{
-        text: "XingHe",
-        text_bottom: -120
-      },
-      BlogCreate:{
-        text:"Blog created in 2024",
-        text_bottom: -50
-      }
-    }
-  },
-  beforeRouteLeave(to, from, next) {
-    console.log('beforeRouteLeave called'); // 添加日志输出以确认是否调用
-    this.overlay_out_view = true
-    this.$nextTick(() => {
-      setTimeout(() => {
-        next(); // 调用 next() 以继续路由导航
-      }, 2000); // 假设动画持续时间为 500ms
-    });
-  },
-}
+const overlay_out_view = ref(false);
+const logo:any = ref({
+    text: "XingHe",
+      text_bottom: -120
+});
+const BlogCreate:any = ref({
+  text:"Blog created in 2024",
+  text_bottom: -50
+});
+onBeforeRouteLeave((to, from, next) => {
+  console.log('beforeRouteLeave called'); // 添加日志输出以确认是否调用
+  overlay_out_view.value = true
+  setTimeout(() => {
+    overlay_out_view.value = false
+    next(); // 调用 next() 以继续路由导航
+  }, 2000); // 假设动画持续时间为 500ms
+})
 </script>
 
 <style scoped>
