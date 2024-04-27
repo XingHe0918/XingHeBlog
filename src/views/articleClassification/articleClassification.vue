@@ -1,6 +1,47 @@
 
 <template>
-  <div>
+  <div class="articleClassificationMain" style="border: #181818 solid 1px">
+    <div>
+      <div class="articleClassificationBodyLeft">
+        <div class="articleClassificationBodySearch">
+          <div class="articleClassificationBodySearchLeft">
+            <el-text>搜索</el-text>
+            <div>
+              <input class="articleClassificationBodySearchInput" type="text" placeholder="请输入内容"/>
+            </div>
+          </div>
+          <div class="articleClassificationBodySearchRight">
+            <el-image class="articleClassificationBodySearchImage" :src="SearchImage"></el-image>
+          </div>
+        </div>
+        <div class="articleClassificationBodyTimeline">
+          <div class="articleClassificationBodyTimelineTitle">
+            <el-text>时间线</el-text>
+          </div>
+<!--          <div class="articleClassificationBodyTimelineColumnName">-->
+<!--            <el-text>时间</el-text>-->
+<!--            <el-text style="margin-left: 40%">文章数量</el-text>-->
+<!--          </div>-->
+          <div  class="articleClassificationBodyTimelineBody">
+            <el-menu>
+              <el-menu-item v-for="(item,index) in timelineData" :key="index" >
+                <div>{{item.dateTime}}</div>
+                <div class="articleClassificationBodyTimelineBodyEl-menu-item-right">{{item.sum}}</div>
+              </el-menu-item>
+            </el-menu>
+          </div>
+        </div>
+        <div class="articleClassificationBodyCategory">
+          分类
+        </div>
+        <div class="articleClassificationBodyTag">
+          标签
+        </div>
+      </div>
+      <div class="articleClassificationBodyRight">
+        <RouterView/>
+      </div>
+    </div>
     <slide-up-overlay :visible="overlay_out_view"></slide-up-overlay>
   </div>
 </template>
@@ -9,7 +50,30 @@
 import { ref } from 'vue'
 import slideUpOverlay from '@/views/tool/overlay/overlay-out.vue'
 import {onBeforeRouteLeave} from "vue-router";
+import SearchImage from '@/image/搜索.png';
+
+
 const overlay_out_view = ref(false)
+const timelineData = ref([
+  {
+    dateTime: '2023',
+    sum: 10,
+  },
+  {
+    dateTime: '2022',
+    sum: 9,
+  },
+  {
+    dateTime: '2021',
+    sum: 8,
+  },
+  {
+    dateTime: '2020',
+    sum: 7,
+  }
+])
+
+
 
 onBeforeRouteLeave((to, from, next) => {
   console.log('beforeRouteLeave called'); // 添加日志输出以确认是否调用
@@ -22,5 +86,194 @@ onBeforeRouteLeave((to, from, next) => {
 </script>
 
 <style scoped>
+.articleClassificationMain{
+  overflow: auto;
+}
+
+.articleClassificationBodyLeft {
+  border: #181818 solid 1px;
+  width: 25%;
+  height: 100vh;
+  position: relative;
+  float: left;
+  padding-top: 30px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.articleClassificationBodyLeft > div{
+  margin-bottom: 30px;
+}
+
+.articleClassificationBodyRight {
+  border: #181818 solid 1px;
+  width: 70%;
+  height: 100vh;
+  position: relative;
+  float: left;
+}
+
+
+.articleClassificationBodySearch {
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+  width: 75%;
+  height: 10%;
+  position: relative;
+  float: left;
+  border-radius: 7% 7% 7% 7% / 25% 25% 25% 25%;
+  padding-top: 3%;
+  padding-left: 8%;
+  transition: margin-top 0.5s ease , width 0.5s ease,height 0.5s ease,padding-top 0.5s ease,padding-left 0.8s ease;
+}
+
+.articleClassificationBodySearch:hover{
+  padding-top: 4%;
+  width: 80%;
+  height: 11%;
+  margin-top: -7px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .4), 0 0 6px rgba(0, 0, 0, .04);
+}
+
+
+
+.articleClassificationBodySearchLeft{
+  float: left;
+  width: 50%;
+}
+.articleClassificationBodySearchRight{
+  margin-top: 10px;
+  margin-right: 30px;
+  float: right;
+}
+
+.articleClassificationBodySearchInput{
+  outline: none;
+  border: none;
+  width: 80%;
+}
+
+.articleClassificationBodySearchImage {
+  width: 30px;
+  float: right;
+}
+
+.articleClassificationBodyTimeline {
+  width: 80%;
+  height: 20%;
+  position: relative;
+  float: left;
+  border-radius: 7% 7% 7% 7% / 15% 15% 15% 15%;
+}
+
+.articleClassificationBodyTimelineColumnName{
+  margin-left: 8%;
+}
+
+
+
+.articleClassificationBodyTimelineBody{
+  background: white;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+  height: 80%;
+  width: 90%;
+  margin-left: 10px;
+  margin-top: 25px;
+  border-radius: 7% 7% 7% 7% / 15% 15% 15% 15%;
+  overflow: auto;
+  transition: margin-top 0.5s ease, margin-left 0.5s ease , width 0.5s ease,height 0.5s ease, box-shadow 0.5s ease;
+}
+.articleClassificationBodyTimelineBody:hover{
+  height: 90%;
+  width: 100%;
+  margin-left: 0;
+  margin-top: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .4), 0 0 6px rgba(0, 0, 0, .04);
+}
+
+.articleClassificationBodyTimelineTitle{
+  margin-left: 10px;
+}
+
+.articleClassificationBodyTimelineBody>>>.el-menu-item{
+  height: 40px;
+}
+
+.articleClassificationBodyTimelineBody>>>.el-menu-item>div{
+  margin-right: 60%;
+}
+
+.articleClassificationBodyCategory {
+  border: #181818 solid 1px;
+  width: 100%;
+  height: 10%;
+  position: relative;
+  float: left;
+  border-radius: 5% 5% 5% 5% / 15% 15% 15% 15%;
+}
+
+.articleClassificationBodyTag {
+  border: #181818 solid 1px;
+  width: 100%;
+  height: 10%;
+  position: relative;
+  float: left;
+  border-radius: 5% 5% 5% 5% / 15% 15% 15% 15%;
+}
+
+
+@media (max-width: 740px) {
+
+  .articleClassificationBodyLeft {
+    width: 100%;
+  }
+  .articleClassificationBodyRight {
+    width: 100%;
+  }
+  .articleClassificationBodySearch {
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+    width: 75%;
+    height: 10%;
+    position: relative;
+    float: left;
+    border-radius: 5% 5% 5% 5% / 20% 20% 20% 20%;
+    padding-top: 1.5%;
+    padding-left: 5%;
+    transition: margin-top 0.5s ease , width 0.5s ease,height 0.5s ease,padding-top 0.5s ease,padding-left 0.8s ease;
+  }
+
+  .articleClassificationBodySearch:hover{
+    padding-top: 2%;
+    width: 80%;
+    height: 11%;
+    margin-top: -7px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .4), 0 0 6px rgba(0, 0, 0, .04);
+  }
+
+  .articleClassificationBodyTimelineBody{
+    background: white;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+    height: 80%;
+    width: 94%;
+    margin-left: 3%;
+    margin-top: 25px;
+    border-radius: 5% 5% 5% 5% / 15% 15% 15% 15%;
+    overflow: auto;
+    transition: margin-top 0.5s ease, margin-left 0.5s ease , width 0.5s ease,height 0.5s ease, box-shadow 0.5s ease;
+  }
+  .articleClassificationBodyTimelineBody:hover{
+    height: 90%;
+    width: 100%;
+    margin-left: 0;
+    margin-top: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .4), 0 0 6px rgba(0, 0, 0, .04);
+  }
+
+
+}
 
 </style>

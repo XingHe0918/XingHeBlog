@@ -15,9 +15,12 @@
 
           <div class="navbar-drawer" :class="{ 'open': menuView }">
             <div style="width: 100%;">
-              <el-menu>
-                <el-menu-item index="/">
+              <el-menu router default-active="">
+                <el-menu-item index="/" @click="changeMenuView">
                   <el-text class="App-navigation-router-link" style="font-size: 24px;">首页</el-text>
+                </el-menu-item>
+                <el-menu-item index="/articleClassification" @click="changeMenuView">
+                  <el-text class="App-navigation-router-link" style="font-size: 24px">文章</el-text>
                 </el-menu-item>
               </el-menu>
             </div>
@@ -25,9 +28,8 @@
         </div>
       </div>
       <div class="App-navigation">
-        <overlayTransition :visible="isOverlayVisible"/>
         <router-link to="/" class="App-navigation-router-link" >首页</router-link>
-        <router-link to="/articleClassification" class="App-navigation-router-link">文章</router-link>
+        <router-link to="/previewPage" class="App-navigation-router-link">文章</router-link>
         <router-link to="/projectClassification" class="App-navigation-router-link">我的</router-link>
         <router-link to="/about" class="App-navigation-router-link">关于</router-link>
         <router-link to="/message" class="App-navigation-router-link">留言</router-link>
@@ -36,14 +38,15 @@
     </div>
       <RouterView class="APPBody"/>
   </div>
-
-
+  <overlayTransition :visible="isOverlayVisible"/>
 </template>
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import overlayTransition from "@/views/tool/overlay/overlay-transition.vue";
+
+
 const menuView = ref<boolean>(false);
 const isOverlayVisible = ref<boolean>(false);
 
@@ -52,6 +55,7 @@ const route = useRoute();
 watch(route, () => {
   isOverlayVisible.value = true;
   setTimeout(() => {
+    menuView.value = false;
     isOverlayVisible.value = false;
   }, 0);
 });
@@ -71,6 +75,9 @@ const changeMenuView = () => {
 html {
   scrollbar-width: none;
   -ms-overflow-style: none;
+}
+body{
+  background: #f6f5f5;
 }
 
 .navbar-drawer {
@@ -181,7 +188,7 @@ html {
 }
 
 
-@media (max-width: 850px)  {
+@media (max-width: 740px)  {
   .App-navigation {
     display: none;
   }

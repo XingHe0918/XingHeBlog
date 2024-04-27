@@ -24,7 +24,14 @@ const router = createRouter({
     {
       path: '/articleClassification',
       name: 'articleClassification',
-      component: () => import('../views/articleClassification/articleClassification.vue')
+      component: () => import('../views/articleClassification/articleClassification.vue'),
+      children:[
+        {
+          path:'/previewPage',
+          name:'/previewPage',
+          component: () => import('../views/articleClassification/previewPage/previewPage.vue')
+        }
+      ]
     }
   ]
 })

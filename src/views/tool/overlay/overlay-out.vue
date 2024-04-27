@@ -21,7 +21,7 @@ defineProps<{
   height: 100%;
   background-color: rgba(0, 0, 0, 1);
   z-index: 19999;
-  transition: top 1s ease;
+  transition: top 0.8s ease;
 }
 
 .slide-up-overlay-enter-active {
