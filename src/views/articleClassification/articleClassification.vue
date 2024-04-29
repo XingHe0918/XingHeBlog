@@ -1,6 +1,6 @@
 
 <template>
-  <div class="articleClassificationMain" style="border: #181818 solid 1px">
+  <div class="articleClassificationMain">
     <div>
       <div class="articleClassificationBodyLeft">
         <div class="articleClassificationBodySearch">
@@ -18,24 +18,42 @@
           <div class="articleClassificationBodyTimelineTitle">
             <el-text>时间线</el-text>
           </div>
-<!--          <div class="articleClassificationBodyTimelineColumnName">-->
-<!--            <el-text>时间</el-text>-->
-<!--            <el-text style="margin-left: 40%">文章数量</el-text>-->
-<!--          </div>-->
           <div  class="articleClassificationBodyTimelineBody">
             <el-menu>
-              <el-menu-item v-for="(item,index) in timelineData" :key="index" >
-                <div>{{item.dateTime}}</div>
-                <div class="articleClassificationBodyTimelineBodyEl-menu-item-right">{{item.sum}}</div>
+              <el-menu-item v-for="(item,index) in timelineDatas" :key="index" >
+                <el-text>
+                  {{item.dataTime}}
+                </el-text>
+                <el-text>
+                  {{item.sum}}
+                </el-text>
               </el-menu-item>
             </el-menu>
           </div>
         </div>
         <div class="articleClassificationBodyCategory">
-          分类
+          <div>
+            <el-text class="articleClassificationBodyCategoryTable">分类</el-text>
+          </div>
+          <div class="articleClassificationBodyCategoryBody">
+            <div v-for="(item,index) in categoryDatas" :key="index">
+              <div class="articleClassificationBodyCategoryName">
+               <el-text>{{item.name}}</el-text>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="articleClassificationBodyTag">
-          标签
+        <div class="articleClassificationBodyCategory">
+          <div>
+            <el-text class="articleClassificationBodyCategoryTable">标签</el-text>
+          </div>
+          <div class="articleClassificationBodyCategoryBody">
+            <div v-for="(item,index) in tagDatas" :key="index">
+              <div class="articleClassificationBodyCategoryName">
+                <el-text>{{item.name}}</el-text>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="articleClassificationBodyRight">
@@ -47,31 +65,87 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import {Ref, ref} from 'vue'
 import slideUpOverlay from '@/views/tool/overlay/overlay-out.vue'
 import {onBeforeRouteLeave} from "vue-router";
 import SearchImage from '@/image/搜索.png';
 
+import {
+  timelineData,
+  categoryData,
+  tagData
+} from "./articleClassification";
 
 const overlay_out_view = ref(false)
-const timelineData = ref([
-  {
-    dateTime: '2023',
-    sum: 10,
-  },
-  {
-    dateTime: '2022',
-    sum: 9,
-  },
-  {
-    dateTime: '2021',
-    sum: 8,
-  },
-  {
-    dateTime: '2020',
-    sum: 7,
-  }
-])
+const timelineDatas: Ref<timelineData[]> = ref([])
+const categoryDatas: Ref<categoryData[]> = ref([])
+const tagDatas: Ref<tagData[]> = ref([])
+
+// 初始化数据
+timelineDatas.value.push({
+  dataTime: '2023',
+  sum: 10,
+})
+timelineDatas.value.push({
+  dataTime: '2022',
+  sum: 9,
+})
+timelineDatas.value.push({
+  dataTime: '2021',
+  sum: 8,
+})
+timelineDatas.value.push({
+  dataTime: '2020',
+  sum: 7,
+})
+
+categoryDatas.value.push({
+  name: '分类1'
+})
+categoryDatas.value.push({
+  name: '分类2sd'
+})
+categoryDatas.value.push({
+  name: '分类3'
+})
+categoryDatas.value.push({
+  name: '分类wa4'
+})
+categoryDatas.value.push({
+  name: '分类dfdsf5'
+})
+categoryDatas.value.push({
+  name: '分类6'
+})
+categoryDatas.value.push({
+  name: '分类7'
+})
+categoryDatas.value.push({
+  name: '分类8'
+})
+
+tagDatas.value.push({
+  name: '标签1'
+})
+tagDatas.value.push({
+  name: '标签2'
+})
+tagDatas.value.push({
+  name: '标签3'
+})
+tagDatas.value.push({
+  name: '标签4'
+})
+tagDatas.value.push({
+  name: '标签5'
+})
+tagDatas.value.push({
+  name: '标签6'
+})
+tagDatas.value.push({
+  name: '标签7'
+})
+//
 
 
 
@@ -91,12 +165,12 @@ onBeforeRouteLeave((to, from, next) => {
 }
 
 .articleClassificationBodyLeft {
-  border: #181818 solid 1px;
+
   width: 25%;
   height: 100vh;
   position: relative;
   float: left;
-  padding-top: 30px;
+  padding-top: 10px;
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -178,7 +252,7 @@ onBeforeRouteLeave((to, from, next) => {
   position: relative;
   box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
   height: 80%;
-  width: 90%;
+  width: 95%;
   margin-left: 10px;
   margin-top: 25px;
   border-radius: 7% 7% 7% 7% / 15% 15% 15% 15%;
@@ -201,18 +275,54 @@ onBeforeRouteLeave((to, from, next) => {
   height: 40px;
 }
 
-.articleClassificationBodyTimelineBody>>>.el-menu-item>div{
+.articleClassificationBodyTimelineBody>>>.el-text{
+  margin-left: 5%;
   margin-right: 60%;
 }
 
 .articleClassificationBodyCategory {
-  border: #181818 solid 1px;
-  width: 100%;
-  height: 10%;
+  width: 80%;
   position: relative;
   float: left;
   border-radius: 5% 5% 5% 5% / 15% 15% 15% 15%;
 }
+
+.articleClassificationBodyCategoryTable{
+  margin-left: 10px;
+}
+
+.articleClassificationBodyCategoryBody{
+  position: relative;
+  margin-left: 30px;
+  height: 80%;
+}
+
+.articleClassificationBodyCategoryName {
+  position: relative;
+  float: left;
+  padding-top: 2px;
+  margin-right: 20px;
+  margin-top: 20px;
+  height: 30px;
+  background: white;
+  border-radius: 10% 10% 10% 10% / 20% 20% 20% 20%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+  transition: transform 0.5s ease; /* 添加过渡效果 */
+}
+
+
+.articleClassificationBodyCategoryName:hover{
+  transform: scale(1.2); /* 鼠标悬停时放大1.2倍 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .4), 0 0 6px rgba(0, 0, 0, .04);
+}
+
+
+.articleClassificationBodyCategoryName>>>.el-text{
+  margin: 10px;
+  font-size: 16px;
+  font-family: 'PingFang SC', sans-serif;
+}
+
 
 .articleClassificationBodyTag {
   border: #181818 solid 1px;
