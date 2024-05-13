@@ -142,9 +142,7 @@ tagDatas.value.push({
 tagDatas.value.push({
   name: '标签6'
 })
-tagDatas.value.push({
-  name: '标签7'
-})
+
 //
 
 
@@ -167,7 +165,6 @@ onBeforeRouteLeave((to, from, next) => {
 .articleClassificationBodyLeft {
 
   width: 25%;
-  height: 100vh;
   position: relative;
   float: left;
   padding-top: 10px;
@@ -193,20 +190,18 @@ onBeforeRouteLeave((to, from, next) => {
   background: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
   width: 75%;
-  height: 10%;
+  height: 70px;
   position: relative;
   float: left;
   border-radius: 7% 7% 7% 7% / 25% 25% 25% 25%;
   padding-top: 3%;
   padding-left: 8%;
-  transition: margin-top 0.5s ease , width 0.5s ease,height 0.5s ease,padding-top 0.5s ease,padding-left 0.8s ease;
+  transition: transform 0.5s ease ,padding-top 0.5s ease,padding-left 0.8s ease;
 }
 
 .articleClassificationBodySearch:hover{
-  padding-top: 4%;
-  width: 80%;
-  height: 11%;
-  margin-top: -7px;
+  padding-top: 10px;
+  transform: scale(1.1);
   box-shadow: 0 2px 4px rgba(0, 0, 0, .4), 0 0 6px rgba(0, 0, 0, .04);
 }
 
@@ -257,13 +252,10 @@ onBeforeRouteLeave((to, from, next) => {
   margin-top: 25px;
   border-radius: 7% 7% 7% 7% / 15% 15% 15% 15%;
   overflow: auto;
-  transition: margin-top 0.5s ease, margin-left 0.5s ease , width 0.5s ease,height 0.5s ease, box-shadow 0.5s ease;
+  transition: transform 0.5s ease , box-shadow 0.5s ease;
 }
 .articleClassificationBodyTimelineBody:hover{
-  height: 90%;
-  width: 100%;
-  margin-left: 0;
-  margin-top: 15px;
+  transform: scale(1.1);
   box-shadow: 0 2px 4px rgba(0, 0, 0, .4), 0 0 6px rgba(0, 0, 0, .04);
 }
 
@@ -342,46 +334,7 @@ onBeforeRouteLeave((to, from, next) => {
   .articleClassificationBodyRight {
     width: 100%;
   }
-  .articleClassificationBodySearch {
-    background: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
-    width: 75%;
-    height: 10%;
-    position: relative;
-    float: left;
-    border-radius: 5% 5% 5% 5% / 20% 20% 20% 20%;
-    padding-top: 1.5%;
-    padding-left: 5%;
-    transition: margin-top 0.5s ease , width 0.5s ease,height 0.5s ease,padding-top 0.5s ease,padding-left 0.8s ease;
-  }
 
-  .articleClassificationBodySearch:hover{
-    padding-top: 2%;
-    width: 80%;
-    height: 11%;
-    margin-top: -7px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .4), 0 0 6px rgba(0, 0, 0, .04);
-  }
-
-  .articleClassificationBodyTimelineBody{
-    background: white;
-    position: relative;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
-    height: 80%;
-    width: 94%;
-    margin-left: 3%;
-    margin-top: 25px;
-    border-radius: 5% 5% 5% 5% / 15% 15% 15% 15%;
-    overflow: auto;
-    transition: margin-top 0.5s ease, margin-left 0.5s ease , width 0.5s ease,height 0.5s ease, box-shadow 0.5s ease;
-  }
-  .articleClassificationBodyTimelineBody:hover{
-    height: 90%;
-    width: 100%;
-    margin-left: 0;
-    margin-top: 15px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .4), 0 0 6px rgba(0, 0, 0, .04);
-  }
 
 
 }

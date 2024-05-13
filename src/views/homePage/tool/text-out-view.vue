@@ -3,6 +3,7 @@
     <div class="line"></div>
     <div class="text" :style="{ bottom: textBottom + 'px' }">{{this.$props.text}}</div>
   </div>
+
 </template>
 
 <script setup lang="ts">
@@ -41,4 +42,5 @@ onMounted(() => {
   text-align: center;
   transition: bottom 2s ease-out; /* 文本向上移动的动画 */
 }
+
 </style>
