@@ -38,13 +38,13 @@
     </div>
       <RouterView class="APPBody"/>
   </div>
-  <overlayTransition :visible="isOverlayVisible"/>
+<!--  <overlayTransition :visible="isOverlayVisible"/>-->
 </template>
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
-import overlayTransition from "@/views/tool/overlay/overlay-transition.vue";
+// import overlayTransition from "@/views/tool/overlay/overlay-transition.vue";
 
 
 const menuView = ref<boolean>(false);
@@ -52,13 +52,13 @@ const isOverlayVisible = ref<boolean>(false);
 
 const route = useRoute();
 
-watch(route, () => {
-  isOverlayVisible.value = true;
-  setTimeout(() => {
-    menuView.value = false;
-    isOverlayVisible.value = false;
-  }, 0);
-});
+// watch(route, () => {
+//   isOverlayVisible.value = true;
+//   setTimeout(() => {
+//     menuView.value = false;
+//     isOverlayVisible.value = false;
+//   }, 0);
+// });
 
 const changeMenuView = () => {
   menuView.value = !menuView.value;

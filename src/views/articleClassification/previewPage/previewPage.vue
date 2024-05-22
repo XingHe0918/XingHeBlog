@@ -5,25 +5,25 @@
         class="list"
         :infinite-scroll-disabled="disabled"
     >
-      <li v-for="i in count" :key="i" class="list-item">
-        <div class="previewPageListElCard">
-          <el-image class="previewPageListElCard_image" :src="Image"> </el-image>
-          <el-row class="previewPageListElCard_el_row">
-            <el-button v-for="i in 2" :key="i" class="previewPageListElCard_el_row_button" text style="background: #2a9c8e">
-              <el-text style="color: white">标签</el-text>
+      <li v-for="item in previewPageData" :key="item" class="list-item">
+        <div class="previewPageListElCard" @click="toBlogContent(item.id)">
+          <el-image class="previewPageListElCard_image" :src="item.image"> </el-image>
+          <el-row>
+            <el-button v-for="i in item.tag" :key="i" class="previewPageListElCard_el_row_button" text style="background: #2a9c8e">
+              <el-text style="color: white">{{ i.name }}</el-text>
             </el-button>
           </el-row>
           <div>
-            <h2 style="margin-left: 10px; text-align: left;">标题</h2>
-            <p style="margin-left: 10px; text-align: left;">简介</p>
-            <el-row class="previewPageListElCard_el_row">
+            <h2 style="margin-left: 10px; margin-top: -5px; text-align: left;">{{ item.title }}</h2>
+            <p style="margin-left: 10px; margin-top: -5px; text-align: left;">{{item.synopsis}}</p>
+            <el-row class="previewPageListElCard_el_footer">
               <el-col :span="8">
                 <el-row>
                   <el-col :span="5">
                     <el-image class="previewPageListElCard_el_rowImage" :src="DateImage" style="margin-top: 10px"></el-image>
                   </el-col>
                   <el-col :span="10" style="padding-top: 8px;">
-                    <el-text>2024年5月13日</el-text>
+                    <el-text>{{ item.datetime }}</el-text>
                   </el-col>
                 </el-row>
               </el-col>
@@ -33,7 +33,7 @@
                     <el-image class="previewPageListElCard_el_rowImage" :src="ReadTimeImage" style="margin-top: 10px"></el-image>
                   </el-col>
                   <el-col :span="10" style="padding-top: 8px;">
-                    <el-text>阅读时长: 3 分钟</el-text>
+                    <el-text>阅读时长: {{item.readTime}} 分钟</el-text>
                   </el-col>
                 </el-row>
               </el-col>
@@ -43,7 +43,7 @@
                     <el-image class="previewPageListElCard_el_rowImage" :src="TextNumImage" style="margin-top: 10px"></el-image>
                   </el-col>
                   <el-col :span="10" style="padding-top: 8px;">
-                    <el-text>字数 : 1000字</el-text>
+                    <el-text>字数 : {{item.textNum}}字</el-text>
                   </el-col>
                 </el-row>
               </el-col>
@@ -59,24 +59,79 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
+import {computed, Ref, ref} from 'vue'
+import router from "@/router";
+
 import Image from "@/image/background.jpg"
 import DateImage from "@/image/日历,日期.png"
 import ReadTimeImage from "@/image/时间.png"
 import TextNumImage from "@/image/笔.png"
+import {previewPageDataValue} from './previewPage'
+
 
 const count = ref(10)
 const loading = ref(false)
 const noMore_Sum = ref(20)// 设置加载次数
 const noMore = computed(() => count.value >= noMore_Sum.value)
 const disabled = computed(() => loading.value || noMore.value)
+
+const previewPageData: Ref<previewPageDataValue[]> = ref([])
+
+// previewPageData.value.push({
+//   title : '标题',
+//   synopsis : '简介',
+//   tag : ref([
+//     {
+//       name: '标签1'
+//     },
+//     {
+//       name:'标签2'
+//     }
+//   ]),
+//   datetime : '2024年5月13日',
+//   readTime : '3',
+//   textNum : '1000',
+//   image : Image,
+// })
+
+
 const load = () => {
   loading.value = true
   setTimeout(() => {
-    count.value += 2
+    previewPageData.value.push({
+      id: 1,
+      title : '标题',
+      synopsis : '简介',
+      tag : [
+        {
+          name: '标签1'
+        },
+        {
+          name:'标签2'
+        }
+      ],
+      datetime : '2024年5月13日',
+      readTime : '3',
+      textNum : '1000',
+      image : Image,
+    })
+    // count.value += 2
     loading.value = false
   }, 2000)
 }
+
+
+function toBlogContent(id){
+  console.log(id);
+  router.push({
+    path: '/blogContent',
+    query: {
+      id: id
+    }
+  })
+}
+
+
 </script>
 
 <style>
@@ -95,16 +150,16 @@ const load = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 430px;
+  height: 450px;
 }
 .infinite-list-wrapper .list-item + .list-item {
   margin-top: 50px;
 }
 .previewPageListElCard{
   width: 800px;
-  height: 430px;
+  height: 450px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .12);
-  border-radius: 3% 3% 0 0 / 10% 10% 0 0;
+  border-radius: 3% 3% 3% 3% / 10% 10% 5% 5%;
 }
 
 .previewPageListElCard_image{
@@ -118,5 +173,9 @@ const load = () => {
 .previewPageListElCard_el_rowImage{
   width: 20px;
 }
-
+.previewPageListElCard_el_footer{
+  position: relative;
+  width: 900px;
+  bottom: -10px;
+}
 </style>

@@ -60,14 +60,14 @@
         <RouterView/>
       </div>
     </div>
-    <slide-up-overlay :visible="overlay_out_view"></slide-up-overlay>
+<!--    <slide-up-overlay :visible="overlay_out_view"></slide-up-overlay>-->
   </div>
 </template>
 
 <script setup lang="ts">
 import {Ref, ref} from 'vue'
-import slideUpOverlay from '@/views/tool/overlay/overlay-out.vue'
-import {onBeforeRouteLeave} from "vue-router";
+// import slideUpOverlay from '@/views/tool/overlay/overlay-out.vue'
+// import {onBeforeRouteLeave} from "vue-router";
 import SearchImage from '@/image/搜索.png';
 
 import {
@@ -76,7 +76,7 @@ import {
   tagData
 } from "./articleClassification";
 
-const overlay_out_view = ref(false)
+// const overlay_out_view = ref(false)
 const timelineDatas: Ref<timelineData[]> = ref([])
 const categoryDatas: Ref<categoryData[]> = ref([])
 const tagDatas: Ref<tagData[]> = ref([])
@@ -147,14 +147,14 @@ tagDatas.value.push({
 
 
 
-onBeforeRouteLeave((to, from, next) => {
-  console.log('beforeRouteLeave called'); // 添加日志输出以确认是否调用
-  overlay_out_view.value = true
-  setTimeout(() => {
-    overlay_out_view.value = false
-    next(); // 调用 next() 以继续路由导航
-  }, 2000); // 假设动画持续时间为 500ms
-})
+// onBeforeRouteLeave((to, from, next) => {
+//   console.log('beforeRouteLeave called'); // 添加日志输出以确认是否调用
+//   overlay_out_view.value = true
+//   setTimeout(() => {
+//     overlay_out_view.value = false
+//     next(); // 调用 next() 以继续路由导航
+//   }, 2000); // 假设动画持续时间为 500ms
+// })
 </script>
 
 <style scoped>
@@ -178,7 +178,7 @@ onBeforeRouteLeave((to, from, next) => {
 }
 
 .articleClassificationBodyRight {
-  border: #181818 solid 1px;
+
   width: 70%;
   height: 100vh;
   position: relative;
@@ -189,8 +189,8 @@ onBeforeRouteLeave((to, from, next) => {
 .articleClassificationBodySearch {
   background: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
-  width: 75%;
-  height: 70px;
+  width: 65%;
+  height: 60px;
   position: relative;
   float: left;
   border-radius: 7% 7% 7% 7% / 25% 25% 25% 25%;
@@ -200,7 +200,7 @@ onBeforeRouteLeave((to, from, next) => {
 }
 
 .articleClassificationBodySearch:hover{
-  padding-top: 10px;
+  padding-top: 12px;
   transform: scale(1.1);
   box-shadow: 0 2px 4px rgba(0, 0, 0, .4), 0 0 6px rgba(0, 0, 0, .04);
 }
@@ -247,8 +247,8 @@ onBeforeRouteLeave((to, from, next) => {
   position: relative;
   box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
   height: 80%;
-  width: 95%;
-  margin-left: 10px;
+  width: 90%;
+  margin-left: 15px;
   margin-top: 25px;
   border-radius: 7% 7% 7% 7% / 15% 15% 15% 15%;
   overflow: auto;

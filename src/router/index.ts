@@ -32,6 +32,11 @@ const router = createRouter({
           component: () => import('../views/articleClassification/previewPage/previewPage.vue')
         }
       ]
+    },
+    {
+      path: '/blogContent',
+      name: 'blogContent',
+      component: () => import('../views/blogContent/blogContent.vue')
     }
   ]
 })
