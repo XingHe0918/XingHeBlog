@@ -20,7 +20,7 @@
           </div>
           <div  class="articleClassificationBodyTimelineBody">
             <el-menu>
-              <el-menu-item v-for="(item,index) in timelineDatas" :key="index" >
+              <el-menu-item v-for="(item,index) in timelineDatas" :key="index" @click="toRouter('/timelinePage',item.dataTime)">
                 <el-text>
                   {{item.dataTime}}
                 </el-text>
@@ -75,12 +75,23 @@ import {
   categoryData,
   tagData
 } from "./articleClassification";
+import router from "@/router";
 
 // const overlay_out_view = ref(false)
 const timelineDatas: Ref<timelineData[]> = ref([])
 const categoryDatas: Ref<categoryData[]> = ref([])
 const tagDatas: Ref<tagData[]> = ref([])
 
+
+function toRouter(routerIndex ,id){
+  console.log(id);
+  router.push({
+    path: routerIndex,
+    query: {
+      timeLine: id
+    }
+  })
+}
 // 初始化数据
 timelineDatas.value.push({
   dataTime: '2023',
@@ -300,6 +311,7 @@ tagDatas.value.push({
   border-radius: 10% 10% 10% 10% / 20% 20% 20% 20%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
   transition: transform 0.5s ease; /* 添加过渡效果 */
+  cursor:pointer
 }
 
 

@@ -6,15 +6,15 @@
         :infinite-scroll-disabled="disabled"
     >
       <li v-for="item in previewPageData" :key="item" class="list-item">
-        <div class="previewPageListElCard" @click="toBlogContent(item.id)">
-          <el-image class="previewPageListElCard_image" :src="item.image"> </el-image>
+        <div class="previewPageListElCard" >
+          <el-image class="previewPageListElCard_image" :src="item.image" @click="toBlogContent(item.id)"> </el-image>
           <el-row>
             <el-button v-for="i in item.tag" :key="i" class="previewPageListElCard_el_row_button" text style="background: #2a9c8e">
               <el-text style="color: white">{{ i.name }}</el-text>
             </el-button>
           </el-row>
           <div>
-            <h2 style="margin-left: 10px; margin-top: -5px; text-align: left;">{{ item.title }}</h2>
+            <h2 style="margin-left: 10px; margin-top: -5px; text-align: left;cursor:pointer" @click="toBlogContent(item.id)">{{ item.title }}</h2>
             <p style="margin-left: 10px; margin-top: -5px; text-align: left;">{{item.synopsis}}</p>
             <el-row class="previewPageListElCard_el_footer">
               <el-col :span="8">
@@ -166,6 +166,7 @@ function toBlogContent(id){
   border-radius: 3% 3% 0 0 / 10% 10% 0 0;
   height: 260px;
   width: 800px;
+  cursor:pointer
 }
 .previewPageListElCard_el_row_button{
   margin: 10px;

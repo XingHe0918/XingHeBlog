@@ -1,30 +1,42 @@
 <template>
-    <el-card class="blogContentCard">
+    <div class="blogContentCard">
       <div class="blogContentBody">
-        <!--      <div>-->
-        <!--        <el-form-item label="公告内容" prop="content">-->
-        <!--          <md-editor v-model="form.content"/>-->
-        <!--        </el-form-item>-->
-        <!--      </div>-->
+<!--              <div>-->
+<!--                <el-form-item label="公告内容" prop="content">-->
+<!--                  <md-editor v-model="form.content"/>-->
+<!--                </el-form-item>-->
+<!--              </div>-->
         <div>
           <div v-html="htmlContent"></div>
         </div>
       </div>
 
-    </el-card>
+    </div>
 
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-// import {MdEditor} from "md-editor-v3";
+import {MdEditor} from "md-editor-v3";
 import 'md-editor-v3/lib/style.css'
 import MarkdownIt from "markdown-it";
 
 const form = ref({
   content: '# MyBatia-Plus\n' +
+      // '# 标题\n' +
+      // '\n' +
+      // '----\n' +
+      // '## 目录\n' +
+      // '1. [目录1](#jump1)\n' +
+      // '2. [目录2](#jump2)\n' +
+      // '\n' +
+      // '---\n' +
+      // '### <p id="jump1" style="">1. 目录1</p>\n' +
+      // '---\n' +
+      // '### <span id="jump2">2. 目录2</span>\n' +
       '\n' +
       '## 简介\n' +
+      '<img src="https://imzbf.github.io/md-editor-rt/imgs/mark_emoji.gif" alt="image" width="100%" height="auto">\n'+
       '\n' +
       '[MyBatis-Plus](https://link.zhihu.com/?target=https%3A//github.com/baomidou/mybatis-plus) （简称 MP，下文就使用简称）是一个 [MyBatis](https://link.zhihu.com/?target=https%3A//www.mybatis.org/mybatis-3/)的增强工具，在 MyBatis 的基础上只做增强不做改变，为简化开发、提高效率而生。官网地址：[https://baomidou.com/](https://link.zhihu.com/?target=https%3A//baomidou.com/) 有以下特性：\n' +
       '\n' +
@@ -156,9 +168,9 @@ const htmlContent = ref(md.render(form.value.content))
   overflow: auto;
 }
 .blogContentCard {
-  margin: 1%;
-  width: 98%;
-  height: 89vh;
+  margin-left: 3%;
+  width: 94%;
+  height: 90vh;
   overflow: auto;
 }
 </style>
