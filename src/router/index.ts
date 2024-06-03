@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePageIndex from '../views/homePage/homePageIndex.vue'
+import {routes} from "vue-router/vue-router-auto-routes";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -46,5 +47,6 @@ const router = createRouter({
 
   ]
 })
+
 
 export default router

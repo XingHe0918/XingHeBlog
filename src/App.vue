@@ -42,15 +42,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
-import { useRoute } from 'vue-router';
+import { ref, } from 'vue';
+// import { useRoute } from 'vue-router';
 // import overlayTransition from "@/views/tool/overlay/overlay-transition.vue";
 
 
 const menuView = ref<boolean>(false);
-const isOverlayVisible = ref<boolean>(false);
+// const isOverlayVisible = ref<boolean>(false);
 
-const route = useRoute();
+// const route = useRoute();
 
 // watch(route, () => {
 //   isOverlayVisible.value = true;

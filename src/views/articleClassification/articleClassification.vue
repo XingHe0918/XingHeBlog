@@ -2,6 +2,7 @@
 <template>
   <div class="articleClassificationMain">
     <div>
+<!--      <el-affix >-->
       <div class="articleClassificationBodyLeft">
         <div class="articleClassificationBodySearch">
           <div class="articleClassificationBodySearchLeft">
@@ -20,7 +21,7 @@
           </div>
           <div  class="articleClassificationBodyTimelineBody">
             <el-menu>
-              <el-menu-item v-for="(item,index) in timelineDatas" :key="index" @click="toRouter('/timelinePage',item.dataTime)">
+              <el-menu-item v-for="(item,index) in timelinePageData" :key="index" @click="toRouter('/timelinePage',item.dataTime)">
                 <el-text>
                   {{item.dataTime}}
                 </el-text>
@@ -36,7 +37,7 @@
             <el-text class="articleClassificationBodyCategoryTable">分类</el-text>
           </div>
           <div class="articleClassificationBodyCategoryBody">
-            <div v-for="(item,index) in categoryDatas" :key="index">
+            <div v-for="(item,index) in categoryPageData" :key="index">
               <div class="articleClassificationBodyCategoryName">
                <el-text>{{item.name}}</el-text>
               </div>
@@ -48,14 +49,16 @@
             <el-text class="articleClassificationBodyCategoryTable">标签</el-text>
           </div>
           <div class="articleClassificationBodyCategoryBody">
-            <div v-for="(item,index) in tagDatas" :key="index">
+            <div v-for="(item,index) in tagPageData" :key="index">
               <div class="articleClassificationBodyCategoryName">
                 <el-text>{{item.name}}</el-text>
               </div>
             </div>
           </div>
         </div>
+
       </div>
+<!--      </el-affix>-->
       <div class="articleClassificationBodyRight">
         <RouterView/>
       </div>
@@ -78,79 +81,79 @@ import {
 import router from "@/router";
 
 // const overlay_out_view = ref(false)
-const timelineDatas: Ref<timelineData[]> = ref([])
-const categoryDatas: Ref<categoryData[]> = ref([])
-const tagDatas: Ref<tagData[]> = ref([])
+const timelinePageData: Ref<timelineData[]> = ref([])
+const categoryPageData: Ref<categoryData[]> = ref([])
+const tagPageData: Ref<tagData[]> = ref([])
 
 
-function toRouter(routerIndex ,id){
-  console.log(id);
+function toRouter(routerIndex:string ,id:string){
   router.push({
     path: routerIndex,
     query: {
       timeLine: id
     }
   })
+  // location.reload();
 }
 // 初始化数据
-timelineDatas.value.push({
+timelinePageData.value.push({
   dataTime: '2023',
   sum: 10,
 })
-timelineDatas.value.push({
+timelinePageData.value.push({
   dataTime: '2022',
   sum: 9,
 })
-timelineDatas.value.push({
+timelinePageData.value.push({
   dataTime: '2021',
   sum: 8,
 })
-timelineDatas.value.push({
+timelinePageData.value.push({
   dataTime: '2020',
   sum: 7,
 })
 
-categoryDatas.value.push({
+categoryPageData.value.push({
   name: '分类1'
 })
-categoryDatas.value.push({
+categoryPageData.value.push({
   name: '分类2sd'
 })
-categoryDatas.value.push({
+categoryPageData.value.push({
   name: '分类3'
 })
-categoryDatas.value.push({
+categoryPageData.value.push({
   name: '分类wa4'
 })
-categoryDatas.value.push({
+categoryPageData.value.push({
   name: '分类dfdsf5'
 })
-categoryDatas.value.push({
+categoryPageData.value.push({
   name: '分类6'
 })
-categoryDatas.value.push({
+categoryPageData.value.push({
   name: '分类7'
 })
-categoryDatas.value.push({
+categoryPageData.value.push({
   name: '分类8'
 })
 
-tagDatas.value.push({
+tagPageData.value.push({
   name: '标签1'
 })
-tagDatas.value.push({
+tagPageData.value.push({
   name: '标签2'
 })
-tagDatas.value.push({
+tagPageData.value.push({
   name: '标签3'
 })
-tagDatas.value.push({
+tagPageData.value.push({
   name: '标签4'
 })
-tagDatas.value.push({
+tagPageData.value.push({
   name: '标签5'
 })
-tagDatas.value.push({
+tagPageData.value.push({
   name: '标签6'
 })
 
