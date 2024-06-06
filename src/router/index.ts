@@ -18,10 +18,32 @@ const router = createRouter({
       ]
     },
     {
-      path: '/about',
-      name: 'about',
-      component: () => import('../views/AboutView.vue')
+      path: '/login',
+      name: 'login',
+      component: () => import('../views/login/loginIndex.vue')
     },
+    {
+      path: '/manage',
+      name: 'manage',
+      component: () => import('../views/managePage/managePage.vue'),
+      children:[
+        {
+          path: '/writeArticle',
+          name: 'writeArticle',
+          component: () => import('../views/writeArticle/writeArticle.vue')
+        },
+        {
+          path: '/manageArticle',
+          name: 'manageArticle',
+          component: () => import('../views/manageArticle/manageArticle.vue')
+        }
+      ]
+    },
+    // {
+    //   path: '/about',
+    //   name: 'about',
+    //   component: () => import('../views/AboutView.vue')
+    // },
     {
       path: '/articleClassification',
       name: 'articleClassification',
@@ -36,14 +58,20 @@ const router = createRouter({
           path: '/timelinePage',
           name: 'timelinePage',
           component: () => import('../views/timelinePage/timelinePage.vue')
+        },
+        {
+          path: '/blogContent',
+          name: 'blogContent',
+          component: () => import('../views/blogContent/blogContent.vue')
+        },
+        {
+          path: '/labelClassification',
+          name: 'labelClassification',
+          component: () => import('../views/labelClassification/labelClassification.vue')
         }
       ]
     },
-    {
-      path: '/blogContent',
-      name: 'blogContent',
-      component: () => import('../views/blogContent/blogContent.vue')
-    },
+
 
   ]
 })

@@ -38,7 +38,7 @@
           </div>
           <div class="articleClassificationBodyCategoryBody">
             <div v-for="(item,index) in categoryPageData" :key="index">
-              <div class="articleClassificationBodyCategoryName">
+              <div class="articleClassificationBodyCategoryName" @click="toRouter('/labelClassification','articleClassification:' + item.id)">
                <el-text>{{item.name}}</el-text>
               </div>
             </div>
@@ -50,7 +50,7 @@
           </div>
           <div class="articleClassificationBodyCategoryBody">
             <div v-for="(item,index) in tagPageData" :key="index">
-              <div class="articleClassificationBodyCategoryName">
+              <div class="articleClassificationBodyCategoryName" @click="toRouter('/labelClassification','labelClassification:' + item.id)">
                 <el-text>{{item.name}}</el-text>
               </div>
             </div>
@@ -86,11 +86,11 @@ const categoryPageData: Ref<categoryData[]> = ref([])
 const tagPageData: Ref<tagData[]> = ref([])
 
 
-function toRouter(routerIndex:string ,id:string){
+function toRouter(routerIndex:string ,id:any){
   router.push({
     path: routerIndex,
     query: {
-      timeLine: id
+      id: id
     }
   })
   // location.reload();
@@ -114,9 +114,11 @@ timelinePageData.value.push({
 })
 
 categoryPageData.value.push({
+  id: 1,
   name: '分类1'
 })
 categoryPageData.value.push({
+  id: 1,
   name: '分类2sd'
 })
 categoryPageData.value.push({
@@ -139,6 +141,7 @@ categoryPageData.value.push({
 })
 
 tagPageData.value.push({
+  id: 1,
   name: '标签1'
 })
 tagPageData.value.push({

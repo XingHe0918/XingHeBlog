@@ -3,7 +3,8 @@
     <div>timelinePage{{ timeLine }}</div>
     <el-timeline style="max-width: 600px">
       <el-timeline-item v-for="(item, index) in TimeLineData" :key="index" :timestamp="item.time" placement="top">
-        <el-card>
+        <el-card @click="toBlogContent(item.id)" style="cursor: pointer;">
+          {{item.id}}
           <el-row>
             <el-col :span="6">
               <el-row>
@@ -25,24 +26,27 @@
 
 <script setup lang="ts">
 import {ref, onMounted, watch} from 'vue';
-import { useRoute } from 'vue-router';
+import {  useRoute} from 'vue-router';
 import Image from '@/image/background.jpg'
+import router from "@/router";
 
 const route = useRoute();
 const timeLine = ref<string>('');
 const TimeLineData = ref<any[]>([]);
 
 // 监听路由参数的变化
-watch(() => route.query.timeLine, (newValue, oldValue) => {
+watch(() => route.query.id, (newValue, oldValue) => {
   console.log('Route parameter timeLine changed:', newValue);
   timeLine.value = newValue as string;
   // 在这里可以执行其他相关的逻辑
   TimeLineData.value.push({
+    id: 1,
     time: '2018/4/12 20:46',
     // ...其他数据
   });
 
   TimeLineData.value.push({
+    id: 2,
     time: '2018/4/3 20:46',
     // ...其他数据
   });
@@ -50,13 +54,15 @@ watch(() => route.query.timeLine, (newValue, oldValue) => {
 
 onMounted(() => {
   console.log("timeLInePage onMounted")
-  timeLine.value = route.query.timeLine as string;
+  timeLine.value = route.query.id as string;
   TimeLineData.value.push({
+    id: 1,
     time: '2018/4/12 20:46',
     // ...其他数据
   });
 
   TimeLineData.value.push({
+    id: 1,
     time: '2018/4/3 20:46',
     // ...其他数据
   });
@@ -64,6 +70,17 @@ onMounted(() => {
   // 请求后端页面数据
 
 });
+
+
+function toBlogContent(id){
+  console.log(id);
+  router.push({
+    path: '/blogContent',
+    query: {
+      id: id
+    }
+  })
+}
 </script>
 
 <style>

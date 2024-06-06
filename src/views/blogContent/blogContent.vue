@@ -16,11 +16,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import {onMounted, ref} from 'vue'
 import {MdEditor} from "md-editor-v3";
 import 'md-editor-v3/lib/style.css'
 import MarkdownIt from "markdown-it";
+import { useRoute } from 'vue-router'
+const router = useRoute()
+const id = ref();
 
+onMounted(() => {
+ id.value = router.query.id;
+})
 const form = ref({
   content: '# MyBatia-Plus\n' +
       // '# 标题\n' +

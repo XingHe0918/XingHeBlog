@@ -8,10 +8,12 @@ export interface timelineData {
 }
 
 export interface categoryData {
+    id?: number
     name?: string,
 }
 
 export interface tagData {
+    id?: number
     name?: string
 }
 

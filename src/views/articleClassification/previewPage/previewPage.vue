@@ -170,6 +170,7 @@ function toBlogContent(id){
 }
 .previewPageListElCard_el_row_button{
   margin: 10px;
+  background: #2a9c8e
 }
 .previewPageListElCard_el_rowImage{
   width: 20px;
