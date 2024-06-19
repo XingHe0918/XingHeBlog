@@ -51,7 +51,6 @@
 import {h, onMounted, ref} from 'vue'
 import {MdEditor} from "md-editor-v3";
 import 'md-editor-v3/lib/style.css'
-import MarkdownIt from "markdown-it";
 import { useRoute } from 'vue-router'
 import {ElNotification} from "element-plus";
 import ProgressComponent from "@/views/writeArticle/ProgressComponent/ProgressComponent.vue";
@@ -60,6 +59,7 @@ import ProgressComponent from "@/views/writeArticle/ProgressComponent/ProgressCo
 const router = useRoute()
 const id = ref();
 const form = ref({
+  id: undefined,
   title:'',
   introduction:'',
   tag : ref([]),
