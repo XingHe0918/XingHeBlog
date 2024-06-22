@@ -8,7 +8,15 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 export default defineConfig({
   server: {
     host: '0.0.0.0',
-    port: 8800
+    port: 8800,
+    proxy: {
+      // 将所有请求代理到 Spring Boot 后端
+      '/api': {
+        target: 'http://localhost:8080', // Spring Boot 后端地址
+        changeOrigin: true,
+        rewrite (path) {return path.replace(/^\/api/, '')},
+      },
+    },
   },
   plugins: [
     vue(),

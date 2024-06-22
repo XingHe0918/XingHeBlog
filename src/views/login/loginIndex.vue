@@ -4,10 +4,10 @@
       <el-text style="text-align: center;"><h1>LOGIN</h1></el-text>
       <el-form label-width="60px" style="margin-top: 60px">
         <el-form-item label="用户名" prop="username" class="loginPageCard_el-form-item">
-          <el-input class="loginPageCard_el-form-item_el-input" v-model="userData.username"></el-input>
+          <el-input class="loginPageCard_el-form-item_el-input" v-model="formData.username"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="password" class="loginPageCard_el-form-item">
-          <el-input type="password" class="loginPageCard_el-form-item_el-input" v-model="userData.password"></el-input>
+          <el-input type="password" class="loginPageCard_el-form-item_el-input" v-model="formData.password"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button class="loginPageCard_button" @click="toManagePage">登录</el-button>
@@ -18,25 +18,30 @@
 </template>
 
 <script setup lang="ts">
-import {ref} from "vue";
+import {reactive, ref} from "vue";
 import router from "@/router";
 
 import {useAuthStore} from '@/stores/useAuthStore'
+import {userData} from "@/api/login/types";
+import {userLogin} from "@/api/login";
+import {TOKEN} from "@/stores/Token";
 
 const authStore = useAuthStore()
 
-const userData = ref({
-  username: '',
-  password:''
-})
+const formData = ref<userData>({})
 
 function toManagePage() {
-  if (userData.value.username === 'admin' && userData.value.password === '123456') {
-    authStore.setToken("userToken",60 * 24)
-    router.push('/manageArticle')
-  } else {
-    alert('用户名或密码错误')
-  }
+  userLogin(formData.value)
+      .then(res => {
+        const Token = TOKEN()
+        Token.setToken(res.token)
+        authStore.setToken("userToken",60 * 24)
+        router.push('/manageArticle')
+      })
+      .catch(err => {
+        console.log(err);
+        alert('用户名或密码错误')
+      })
 }
 
 

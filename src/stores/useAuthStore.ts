@@ -1,5 +1,6 @@
 // stores/auth.ts
 import { defineStore } from 'pinia'
+import {TOKEN} from "@/stores/Token";
 
 export const useAuthStore = defineStore('auth', {
     state: () => ({
@@ -26,6 +27,8 @@ export const useAuthStore = defineStore('auth', {
             this.tokenExpiration = null
             localStorage.removeItem('token')
             localStorage.removeItem('tokenExpiration')
+            const Token = TOKEN()
+            Token.clearToken()
         },
         checkTokenValidity() {
             if (this.tokenExpiration && new Date() > this.tokenExpiration) {
