@@ -5,7 +5,7 @@ export interface previewPageDataValue{
     title: string;
     // 文章简介
     synopsis: string;
-    // 文章作者
+
     tag: { name: string }[]
     // 文章创建时间
     datetime: string;

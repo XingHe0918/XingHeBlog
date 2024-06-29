@@ -25,9 +25,10 @@ import {useAuthStore} from '@/stores/useAuthStore'
 import {userData} from "@/api/login/types";
 import {userLogin} from "@/api/login";
 import {TOKEN} from "@/stores/Token";
+import {userDataStore} from '@/stores/userData'
 
 const authStore = useAuthStore()
-
+const userSrote = userDataStore()
 const formData = ref<userData>({})
 
 function toManagePage() {
@@ -36,6 +37,7 @@ function toManagePage() {
         const Token = TOKEN()
         Token.setToken(res.token)
         authStore.setToken("userToken",60 * 24)
+        userSrote.setName(formData.value.username)
         router.push('/manageArticle')
       })
       .catch(err => {

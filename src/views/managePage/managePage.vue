@@ -67,6 +67,7 @@ onMounted(() => {
 }
 .ManageBodyRight{
   margin-left: 100px;
+  width: 70%;
 }
 .ManageBodyRightDetail{
   position: fixed;

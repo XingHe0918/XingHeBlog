@@ -2,16 +2,16 @@
 
 <template>
 <div class="manageArticleMain">
-   <el-table :data="tableData" style="width: 100%" max-height="80vh"  >
+   <el-table :data="tableData"  style="width: 100%" max-height="80vh"  >
      <el-table-column label="序号" width="140" type="index" />
      <el-table-column prop="title" label="标题" width="140"/>
-     <el-table-column prop="author" label="作者" width="140"/>
-     <el-table-column prop="date" label="日期" width="140"/>
-     <el-table-column prop="content" label="是否发布" width="140">
+     <el-table-column prop="uid" label="作者" width="140"/>
+     <el-table-column prop="datetime" label="日期" width="140"/>
+     <el-table-column prop="isOpen" label="是否发布" width="140">
        <template #default="scope">
 <!--         <el-button size="small" @click="handleEdit(scope.$index, scope.row)">发布</el-button>-->
-         <el-tag style="cursor: pointer;caret-color: transparent;" size="small" :type="scope.row.status === '0' ? 'danger' : 'success'" disable-transitions @click="isPublish(scope.$index, scope.row)">
-           {{ scope.row.status === '0' ? '未发布' : '已发布' }}
+         <el-tag style="cursor: pointer;caret-color: transparent;" size="small" :type="scope.row.isOpen === '0' ? 'danger' : 'success'" disable-transitions @click="isPublish(scope.$index, scope.row)">
+           {{ scope.row.isOpen === '0' ? '未发布' : '已发布' }}
          </el-tag>
        </template>
      </el-table-column>
@@ -31,37 +31,24 @@
 
 <script setup lang="ts">
 
-import {ref} from "vue";
+import {onMounted, reactive, ref} from "vue";
 import router from "@/router";
 
 const tablePage = ref(1)
 
-const tableData = ref([
-    {
-      id: '1',
-      title: '文章1',
-      author: '作者1',
-      date: '2022-01-01',
-      status: '0',
-    },
-    {
-      id: '5',
-      title: '文章2',
-      author: '作者2',
-      date: '2022-01-02',
-      status: '0',
-    },
-    {
-      id: '3',
-      title: '文章3',
-      author: '作者3',
-      date: '2022-01-03',
-      status: '0',
-    },
-])
+import {manageArticleData} from "@/api/manageArticle/types";
+import {getArticleAll} from "@/api/manageArticle";
+
+const tableData = ref([<manageArticleData>{}])
+
+onMounted(() => {
+  getArticleAll().then(res => {
+    console.log(res)
+    tableData.value = res.data
+  })
+})
 
 function handleEdit(index,item){
-  console.log(index,item)
   router.push({path: '/writeArticle', query: {id: item.id}})
 }
 function handleDelete(index,item){
